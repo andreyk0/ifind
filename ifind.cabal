@@ -24,7 +24,7 @@ executable ifind
 
   build-depends:       aeson >= 0.6,
                        aeson-pretty >= 0.7,
-                       base >= 4.6 && < 4.7,
+                       base >= 4.6,
                        bytestring >= 0.10,
                        cmdargs >= 0.10,
                        deepseq >= 1.3,

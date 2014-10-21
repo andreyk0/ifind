@@ -68,7 +68,7 @@ runUI opts conf = do
 newSearchApp :: IFindOpts -> IFindConfig -> IO (SearchApp, Widget FocusGroup)
 newSearchApp opts conf = do
   editSearchWidget' <- editWidget
-  searchResultsWidget' <- newTextList def_attr []
+  searchResultsWidget' <- newTextList def_attr [] 1
   statusWidget' <- plainText "*>" >>= withNormalAttribute (searchCountAttr conf)
   activateHandlers' <- newHandlers
 
