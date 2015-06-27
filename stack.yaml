@@ -1,0 +1,12 @@
+flags: {}
+packages:
+- '.'
+- location:
+    git: git@github.com:andreyk0/vty-ui.git
+    commit: 46a382d9bbbd62b08016272f15d6a387b6838cd1
+- '../regex-tdfa-text'
+
+extra-deps:
+- vty-5.2.9
+
+resolver: nightly-2015-06-26

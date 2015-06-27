@@ -68,7 +68,7 @@ runUI opts conf = do
 newSearchApp :: IFindOpts -> IFindConfig -> IO (SearchApp, Widget FocusGroup)
 newSearchApp opts conf = do
   editSearchWidget' <- editWidget
-  searchResultsWidget' <- newTextList def_attr [] 1
+  searchResultsWidget' <- newTextList [] 1
   statusWidget' <- plainText "*>" >>= withNormalAttribute (searchCountAttr conf)
   activateHandlers' <- newHandlers
 
@@ -101,7 +101,7 @@ newSearchApp opts conf = do
 
   editSearchWidget' `onKeyPressed` \_ key mods -> do
     case (key, mods) of
-      (KASCII 'u', [MCtrl]) -> do
+      (KChar 'u', [MCtrl]) -> do
         ic <- readIORef ignoreCaseRef
         writeIORef ignoreCaseRef (not ic)
         updateSearchResults sApp
@@ -111,10 +111,10 @@ newSearchApp opts conf = do
 
   searchResultsWidget' `onKeyPressed` \w key mods ->
     case (key, mods) of
-      (KASCII 'p', [MCtrl]) -> scrollUp w >> return True
-      (KASCII 'n', [MCtrl]) -> scrollDown w >> return True
-      (KASCII 'k', []) -> scrollUp w >> return True
-      (KASCII 'j', []) -> scrollDown w >> return True
+      (KChar 'p', [MCtrl]) -> scrollUp w >> return True
+      (KChar 'n', [MCtrl]) -> scrollDown w >> return True
+      (KChar 'k', []) -> scrollUp w >> return True
+      (KChar 'j', []) -> scrollDown w >> return True
       (_, _)           -> return False
 
   searchResultsWidget' `onItemActivated` \_ -> do
@@ -157,11 +157,9 @@ updateSearchResults sApp = do
     Right filterPredicate -> do
       let matchingFps = filter (filterPredicate) $ allFilePaths sApp
 
-      -- height of the screen, don't need to add to list more results than this
-      maxHeight <- fromIntegral <$> region_height  <$> (terminal_handle >>= display_bounds)
 
       writeIORef (matchingFilePaths sApp) matchingFps
-      addToResultsList sApp $ take maxHeight matchingFps
+      addToResultsList sApp $ take 64 matchingFps
 
   updateStatusText sApp
 

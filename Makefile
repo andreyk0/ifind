@@ -1,13 +1,12 @@
 
 build:
-	cabal build
+	stack build
 
 clean:
-	cabal clean
+	stack clean
 
-deps:
-	cabal install --dependencies-only
+install:
+	stack install
 
-init:
-	cabal sandbox init
-	cabal install --dependencies-only
+tags:
+	hasktags --ctags --extendedctag  . ../vty ../vty-ui
