@@ -19,7 +19,11 @@ cabal-version:       >=1.10
 executable ifind
   main-is:             Main.hs
 
-  -- other-modules:       
+  other-modules: IFind.Config,
+                 IFind.FS,
+                 IFind.Opts,
+                 IFind.UI
+
   -- other-extensions:    
 
   build-depends:       aeson >= 0.6,
@@ -30,14 +34,13 @@ executable ifind
                        deepseq >= 1.3,
                        directory >= 1.2,
                        filemanip >= 0.3,
-                       regex-tdfa >= 1.2,
-                       regex-tdfa-text >= 1.0.0.2,
+                       regex-pcre >= 0.94.4,
                        text >= 0.11,
                        vty >= 4.7,
                        vty-ui >= 1.9
 
   -- hs-source-dirs:      
 
-  ghc-options:         -Wall -threaded
+  ghc-options:         -Wall -threaded -fno-warn-orphans
 
   default-language:    Haskell2010

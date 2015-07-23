@@ -7,7 +7,6 @@ module IFind.Config (
   readConfFile
 ) where
 
-import Control.Applicative
 import Data.Aeson
 import Data.Aeson.Encode.Pretty
 import Data.Aeson.TH
